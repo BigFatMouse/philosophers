@@ -63,13 +63,3 @@ int	ft_atoi(const char *str)
 		num = -num;
 	return (num);
 }
-
-// int main()
-// {
-// 	char *str = "abc";
-// 	char * str2 = "123";
-	
-// 	int a = ft_isnum(str);
-// 	int b = ft_isnum(str2);
-// 	printf("%d %d\n", a, b);
-// }
