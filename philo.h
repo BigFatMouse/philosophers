@@ -42,5 +42,5 @@ void	ft_putendl_fd(char *s, int fd);
 int		ft_isnum(const char *str);
 int		ft_error(char *str);
 int		parse_data(t_data *data, int argc, char **argv);
-ssize_t	get_time(ssize_t time);
+ssize_t	g_t(ssize_t time);
 #endif
