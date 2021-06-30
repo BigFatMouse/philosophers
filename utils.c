@@ -1,37 +1,28 @@
 #include "philo.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_error(char *str)
 {
-	const char	*str;
-
-	str = s;
-	while (*str)
-		str++;
-	return (str - s);
+	printf("Error: %s\n", str);
+	return (1);
 }
 
-void	ft_putendl_fd(char *s, int fd)
+ssize_t	get_time(ssize_t time)
 {
-	int	i;
+	struct timeval	t;
 
-	i = 0;
-	if (s)
-	{
-		while (s[i])
-			write(fd, &s[i++], 1);
-		write(fd, "\n", 1);
-	}
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000 + t.tv_usec / 1000) - time);
 }
 
 int	ft_isnum(const char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return(0);
+			return (0);
 		i++;
 	}
 	return (1);
