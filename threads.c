@@ -40,6 +40,7 @@ void	*philo_life(void *one_philo)
 		ft_usleep(100); //usleep((philo->data->eat_time) * 1000 + 200);
 	while (1)
 	{
+		ft_usleep(10);
 		pthread_mutex_lock(&philo->left);
 		printf("%zd  %d has taken a fork\n", g_t(philo->data->time), philo->num);
 		pthread_mutex_lock(philo->right);
@@ -69,6 +70,7 @@ void	*philo_death(void *one_philo)
 	while (1)
 	{	
 		i = -1;
+		ft_usleep(10);
 		while (++i < philo->data->philos_num)
 		{
 			if (g_t(philo->data->time) > philo->last_meal_time

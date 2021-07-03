@@ -101,8 +101,6 @@ int	main(int argc, char **argv)
 		return (ft_error("Can't create thread"));
 	if (make_threads(philo, data, philo_thread, main_thread))
 		return (1);
-	if (data.meals_num)
-		print_res(data, philo);
 	free(philo_thread);
 	free(philo);
 	return (0);

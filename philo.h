@@ -48,5 +48,6 @@ void	count_eat_time(t_philo *philo);
 void	*philo_death(void *one_philo);
 void	*philo_life(void *one_philo);
 void	ft_usleep(unsigned int n);
+void	print_res(t_data data, t_philo *philo);
 
 #endif
