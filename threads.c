@@ -37,7 +37,7 @@ void	*philo_life(void *one_philo)
 
 	philo = (t_philo *)one_philo;
 	if ((philo->num) % 2 == 0)
-		usleep(100); //usleep((philo->data->eat_time) * 1000 + 200);
+		ft_usleep(100); //usleep((philo->data->eat_time) * 1000 + 200);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->left);
@@ -50,11 +50,11 @@ void	*philo_life(void *one_philo)
 		philo->meals++;
 		count_eat_time(philo);
 		pthread_mutex_unlock(&philo->eat);
-		usleep((philo->data->eat_time) * 1000);
+		ft_usleep((philo->data->eat_time) * 1000);
 		pthread_mutex_unlock(&philo->left);
 		pthread_mutex_unlock(philo->right);
 		printf("%zd  %d is sleeping\n", g_t(philo->data->time), philo->num);
-		usleep((philo->data->sleep_time) * 1000);
+		ft_usleep((philo->data->sleep_time) * 1000);
 		printf("%zd  %d is thinking\n", g_t(philo->data->time), philo->num);
 	}
 	return (NULL);
