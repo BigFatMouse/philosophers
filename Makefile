@@ -2,7 +2,7 @@ NAME = philo
 HEADER = philo.h
 CC = gcc 
 FLAGS = -pthread -Wall -Wextra -Werror 
-SRC = philo.c utils.c
+SRC = philo.c utils.c threads.c
 	
 OBJ = $(SRC:%.c=%.o)
 
