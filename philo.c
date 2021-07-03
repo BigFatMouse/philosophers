@@ -1,60 +1,23 @@
 #include "philo.h"
 
-void	*philo_death(void *one_philo)
+int	parse_data(t_data *data, int argc, char **argv)
 {
-	int		i;
-	t_philo	*philo;
+	int	i;
 
-	philo = (t_philo *)one_philo;
-	while (1)
-	{	
-		i = -1;
-		while (++i < philo->data->philos_num)
-		{
-			if (g_t(philo->data->time) > philo->last_meal_time
-				+ philo->data->die_time)
-			{
-				pthread_mutex_lock(&philo->eat);
-				pthread_mutex_lock(&philo->data->dead);
-				printf("%.5zd   %d %sis dead%s\n", g_t(philo->data->time),
-					philo->num, RED, RESET);
-				philo->data->death = 1;
-				pthread_mutex_unlock(&philo->eat);
-				return (NULL);
-			}
-			if (philo->data->meals_num == philo->meals)
-				return (NULL);
-		}
-	}
-	return (NULL);
-}
-
-void	*philo_life(void *one_philo)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)one_philo;
-	if ((philo->num) % 2 == 0)
-		usleep((philo->data->eat_time) * 1000 + 500);
-	while (1)
-	{
-		pthread_mutex_lock(&philo->left);
-		printf("%zd  %d has taken a fork\n", g_t(philo->data->time), philo->num);
-		pthread_mutex_lock(philo->right);
-		printf("%zd  %d has taken a fork\n", g_t(philo->data->time), philo->num);
-		pthread_mutex_lock(&philo->eat);
-		philo->last_meal_time = g_t(philo->data->time);
-		printf("%zd  %d is eating\n", philo->last_meal_time, philo->num);
-		philo->meals++;
-		pthread_mutex_unlock(&philo->eat);
-		usleep((philo->data->eat_time) * 1000);
-		pthread_mutex_unlock(&philo->left);
-		pthread_mutex_unlock(philo->right);
-		printf("%zd  %d is sleeping\n", g_t(philo->data->time), philo->num);
-		usleep((philo->data->sleep_time) * 1000);
-		printf("%zd  %d is thinking\n", g_t(philo->data->time), philo->num);
-	}
-	return (NULL);
+	i = 0;
+	if (argc < 5 || argc > 6)
+		return (ft_error("Error: Enter 4 or 5 argumens"));
+	while (++i < argc)
+		if (!ft_isnum(argv[i]) || !ft_atoi(argv[i]))
+			return (ft_error("Error: All arguments must be positive numbers"));
+	data->meals_num = 0;
+	data->philos_num = ft_atoi(argv[1]);
+	data->die_time = ft_atoi(argv[2]);
+	data->eat_time = ft_atoi(argv[3]);
+	data->sleep_time = ft_atoi(argv[4]);
+	if (argc == 6)
+		data->meals_num = ft_atoi(argv[5]);
+	return (0);
 }
 
 void	philo_init(t_philo *philo, t_data *data)
@@ -106,6 +69,18 @@ int	make_threads(t_philo *philo, t_data data,
 	return (0);
 }
 
+void	print_res(t_data data, t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < data.philos_num)
+	{
+		printf("%d has eaten %d times\n", i + 1, philo[i].meals);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_data		data;
@@ -126,8 +101,9 @@ int	main(int argc, char **argv)
 		return (ft_error("Can't create thread"));
 	if (make_threads(philo, data, philo_thread, main_thread))
 		return (1);
+	if (data.meals_num)
+		print_res(data, philo);
 	free(philo_thread);
 	free(philo);
-	write(1, "Exit\n", 5);
 	return (0);
 }

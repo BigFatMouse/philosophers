@@ -1,31 +1,5 @@
 #include "philo.h"
 
-int	parse_data(t_data *data, int argc, char **argv)
-{
-	int	i;
-
-	i = 0;
-	if (argc < 5 || argc > 6)
-		return (ft_error("Error: Enter 4 or 5 argumens"));
-	while (++i < argc)
-		if (!ft_isnum(argv[i]) || !ft_atoi(argv[i]))
-			return (ft_error("Error: All arguments must be positive numbers"));
-	data->meals_num = 0;
-	data->philos_num = ft_atoi(argv[1]);
-	data->die_time = ft_atoi(argv[2]);
-	data->eat_time = ft_atoi(argv[3]);
-	data->sleep_time = ft_atoi(argv[4]);
-	if (argc == 6)
-		data->meals_num = ft_atoi(argv[5]);
-	printf("parce: ");
-	printf("%d ", data->philos_num);
-	printf("%d ", data->die_time);
-	printf("%d ", data->eat_time);
-	printf("%d ", data->sleep_time);
-	printf("%d\n", data->meals_num);
-	return (0);
-}
-
 int	ft_error(char *str)
 {
 	printf("Error: %s\n", str);

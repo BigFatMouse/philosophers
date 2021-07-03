@@ -43,4 +43,9 @@ int		ft_isnum(const char *str);
 int		ft_error(char *str);
 int		parse_data(t_data *data, int argc, char **argv);
 ssize_t	g_t(ssize_t time);
+int		check_eat_time(t_philo *philo);
+void	count_eat_time(t_philo *philo);
+void	*philo_death(void *one_philo);
+void	*philo_life(void *one_philo);
+
 #endif
