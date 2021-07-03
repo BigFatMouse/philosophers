@@ -86,7 +86,10 @@ void	*philo_death(void *one_philo)
 			}
 		}
 		if (check_eat_time(philo))
+		{
+			philo->data->death = 1;
 			return (NULL);
+		}
 	}
 	return (NULL);
 }
