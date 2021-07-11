@@ -25,14 +25,16 @@ void	philo_init(t_philo *philo, t_data *data)
 	int	i;
 
 	i = 0;
+	pthread_mutex_init(&data->write, NULL);
 	while (i < data->philos_num)
 	{
 		philo[i].num = i + 1;
 		pthread_mutex_init(&philo[i].left, NULL);
 		pthread_mutex_init(&philo[i].eat, NULL);
+		philo[i].write = &data->write;
 		philo[i].meals = 0;
-		philo[i].fead_up = 0;
 		philo[i].data = data;
+		philo[i].last_meal_time = 0;
 		if (i == data->philos_num - 1)
 			philo[i].right = &philo[0].left;
 		else
@@ -42,6 +44,7 @@ void	philo_init(t_philo *philo, t_data *data)
 	pthread_mutex_init(&data->dead, NULL);
 	data->death = 0;
 	data->time = g_t(0);
+	data->fead_up = 0;
 }
 
 int	make_threads(t_philo *philo, t_data data,
@@ -55,6 +58,7 @@ int	make_threads(t_philo *philo, t_data data,
 		if (pthread_create(&philo_thread[i], NULL, philo_life,
 				(void *)(&philo[i])) == -1)
 			return (ft_error("Can't create thread"));
+		ft_usleep(100);
 		i++;
 	}
 	if (pthread_join(main_thread, NULL) == -1)
@@ -62,23 +66,11 @@ int	make_threads(t_philo *philo, t_data data,
 	i = 0;
 	while (i < data.philos_num)
 	{
-		if (pthread_detach(philo_thread[i]))
+		if (pthread_detach(philo_thread[i]) == -1)
 			return (ft_error("Can't detach thread"));
 		i++;
 	}
 	return (0);
-}
-
-void	print_res(t_data data, t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < data.philos_num)
-	{
-		printf("%d has eaten %d times\n", i + 1, philo[i].meals);
-		i++;
-	}
 }
 
 int	main(int argc, char **argv)

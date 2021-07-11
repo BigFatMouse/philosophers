@@ -7,20 +7,21 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
-# define RESET   "\033[0m"
-# define RED     "\033[1;31m"
+# define RESET	"\033[0m"
+# define RED	"\033[1;31m"
 
 typedef struct s_data
 {
 	int				philos_num;
-	int				die_time;
-	int				eat_time;
-	int				sleep_time;
+	unsigned int	die_time;
+	unsigned int	eat_time;
+	unsigned int	sleep_time;
 	int				meals_num;
 	int				death;
 	int				fead_up;
 	ssize_t			time;
 	pthread_mutex_t	dead;
+	pthread_mutex_t	write;
 }					t_data;
 
 typedef struct s_philo
@@ -28,10 +29,10 @@ typedef struct s_philo
 	int				num;
 	ssize_t			last_meal_time;
 	int				meals;
-	int				fead_up;
 	t_data			*data;
 	pthread_mutex_t	left;
 	pthread_mutex_t	*right;
+	pthread_mutex_t	*write;
 	pthread_mutex_t	eat;
 }					t_philo;
 

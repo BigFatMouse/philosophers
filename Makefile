@@ -1,7 +1,7 @@
 NAME = philo
 HEADER = philo.h
 CC = gcc 
-FLAGS = -pthread -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror 
 SRC = philo.c utils.c threads.c
 	
 OBJ = $(SRC:%.c=%.o)
@@ -9,7 +9,7 @@ OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
-	$(CC) $(OBJ) -o $(NAME) -lncurses
+	$(CC) $(OBJ) -o $(NAME)
 
 %.o: %.c $(LIBFT) $(HEADER) 
 	$(CC) $(FLAGS) -c $< -o $@
