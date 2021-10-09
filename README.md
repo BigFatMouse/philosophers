@@ -1,6 +1,6 @@
 <h1>Philosophers</h1>
 
-In this project we need to solve dining philosophers problem using threads and the mutex.
+In this project we need to solve [dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem) using threads and the mutex.
 
 One or more philosophers are sitting at a round table doing one of three things:
 eating, thinking, or sleeping.
