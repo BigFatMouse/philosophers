@@ -27,19 +27,23 @@ To run project:
 
 example:     
 
-./philo 21 290 100 100
+./philo 4 410 200 200
 
-./philo 50 210 100 100
+./philo 4 310 200 100
 
-./philo 199 2000 600 60 7
+./philo 5 800 200 200
+
+./philo 5 800 200 200 7
+
+./philo 1 800 200 200
 
 <b>number_of_philosophers:</b> is the number of philosophers and also the number
-of forks from 0 to 200
+of forks (from 0 to 200)
 
-<b>time_to_die:</b> is in milliseconds, if a philosopher doesn’t start eating ’time_to_die’ milliseconds after starting his last meal or the beginning of the simulation, it dies
+<b>time_to_die:</b> is in milliseconds, if a philosopher doesn’t start eating ’time_to_die’ milliseconds after starting his last meal or the beginning of the simulation, it dies (must be more than 60 ms)
 
-<b>time_to_eat:</b> is in milliseconds and is the time it takes for a philosopher to eat. During that time he will need to keep the two forks.
+<b>time_to_eat:</b> is in milliseconds and is the time it takes for a philosopher to eat. During that time he will need to keep the two forks (must be more than 60 ms)
 
-<b>time_to_sleep:</b> is in milliseconds and is the time the philosopher will spend sleeping.
+<b>time_to_sleep:</b> is in milliseconds and is the time the philosopher will spend sleeping (must be more than 60 ms)
 
 <b>number_of_times_each_philosopher_must_eat:</b>  argument is optional, if all philosophers eat at least ’number_of_times_each_philosopher_must_eat’ the simulation will stop. If not specified, the simulation will stop only at the death of a philosopher. 
